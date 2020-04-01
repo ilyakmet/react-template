@@ -12,6 +12,7 @@
     "lint:write": "eslint --debug src/ --fix",
     "stats": "npx webpack --json > stats.json && webpack-bundle-analyzer stats.json"
   },
+  "precommit": "lint-staged",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -56,6 +57,7 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^6.10.1",
+    "eslint-loader": "^3.0.3",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",
@@ -68,6 +70,7 @@
     "jest-enzyme": "^7.1.2",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
+    "lint-staged": "^10.1.1",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
@@ -85,5 +88,12 @@
     "@babel/polyfill": "^7.8.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
+  },
+  "lint-staged": {
+    "*.{js, jsx}": [
+      "npx --max-warnings=0",
+      "prettier --write",
+      "git add"
+    ]
   }
 }

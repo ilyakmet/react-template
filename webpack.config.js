@@ -49,7 +49,7 @@ module.exports = {
   entry: ['@babel/polyfill', './src/index.js'],
   output: {
     filename: filename('js'),
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
   },
   resolve: {
     alias: {
@@ -75,23 +75,23 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, 'public/favicon.ico'),
-        to: path.resolve(__dirname, 'dist'),
+        to: path.resolve(__dirname, 'build'),
       },
       {
         from: path.resolve(__dirname, 'public/manifest.json'),
-        to: path.resolve(__dirname, 'dist'),
+        to: path.resolve(__dirname, 'build'),
       },
       {
         from: path.resolve(__dirname, 'public/robots.txt'),
-        to: path.resolve(__dirname, 'dist'),
+        to: path.resolve(__dirname, 'build'),
       },
       {
         from: path.resolve(__dirname, 'public/logo192.png'),
-        to: path.resolve(__dirname, 'dist'),
+        to: path.resolve(__dirname, 'build'),
       },
       {
         from: path.resolve(__dirname, 'public/logo512.png'),
-        to: path.resolve(__dirname, 'dist'),
+        to: path.resolve(__dirname, 'build'),
       },
     ]),
     new MiniCssExtractPlugin({
