@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss';
 import logo from '../../../public/logo.svg';
 
-function App() {
+export default () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -22,6 +22,4 @@ function App() {
       </header>
     </div>
   );
-}
-
-export default App;
+};
