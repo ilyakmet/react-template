@@ -30,12 +30,12 @@ const cssLoaders = (loaders = []) => [
   ...loaders,
 ];
 
-const jsLoaders = (loaders = [], plugins = []) => [
+const jsLoaders = (presets = [], plugins = [], loaders = []) => [
   {
     loader: 'babel-loader',
     options: {
-      presets: ['@babel/preset-env', '@babel/preset-react'],
-      plugins: ['@babel/plugin-proposal-class-properties', ...plugins],
+      presets: ['@babel/preset-env', '@babel/preset-react', ...presets],
+      plugins: [...plugins],
     },
   },
   {
@@ -46,7 +46,7 @@ const jsLoaders = (loaders = [], plugins = []) => [
 
 module.exports = {
   mode: 'development',
-  entry: ['@babel/polyfill', './src/index.js'],
+  entry: ['@babel/polyfill', path.resolve(__dirname, 'src', 'index.js')],
   output: {
     filename: filename('js'),
     path: path.resolve(__dirname, 'build'),
@@ -68,29 +68,29 @@ module.exports = {
   devtool: isDev ? 'source-map' : '',
   plugins: [
     new HTMLWebpackPlugin({
-      template: './public/index.html',
+      template: path.resolve(__dirname, 'public', 'index.html'),
       minify: { collapseWhitespace: !isDev },
     }),
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, 'public/favicon.ico'),
+        from: path.resolve(__dirname, 'public', 'favicon.ico'),
         to: path.resolve(__dirname, 'build'),
       },
       {
-        from: path.resolve(__dirname, 'public/manifest.json'),
+        from: path.resolve(__dirname, 'public', 'manifest.json'),
         to: path.resolve(__dirname, 'build'),
       },
       {
-        from: path.resolve(__dirname, 'public/robots.txt'),
+        from: path.resolve(__dirname, 'public', 'robots.txt'),
         to: path.resolve(__dirname, 'build'),
       },
       {
-        from: path.resolve(__dirname, 'public/logo192.png'),
+        from: path.resolve(__dirname, 'public', 'logo192.png'),
         to: path.resolve(__dirname, 'build'),
       },
       {
-        from: path.resolve(__dirname, 'public/logo512.png'),
+        from: path.resolve(__dirname, 'public', 'logo512.png'),
         to: path.resolve(__dirname, 'build'),
       },
     ]),
