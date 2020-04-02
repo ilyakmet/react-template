@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -30,12 +32,12 @@ const cssLoaders = (loaders = []) => [
   ...loaders,
 ];
 
-const jsLoaders = (loaders = [], plugins = []) => [
+const jsLoaders = (presets = [], plugins = [], loaders = []) => [
   {
     loader: 'babel-loader',
     options: {
-      presets: ['@babel/preset-env', '@babel/preset-react'],
-      plugins: ['@babel/plugin-proposal-class-properties', ...plugins],
+      presets: ['@babel/preset-env', '@babel/preset-react', ...presets],
+      plugins: [...plugins],
     },
   },
   {
@@ -46,12 +48,14 @@ const jsLoaders = (loaders = [], plugins = []) => [
 
 module.exports = {
   mode: 'development',
-  entry: ['@babel/polyfill', './src/index.js'],
+  entry: './src/index.tsx',
   output: {
     filename: filename('js'),
+    publicPath: '/',
     path: path.resolve(__dirname, 'build'),
   },
   resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
     alias: {
       '@public': path.resolve(__dirname, 'public'),
     },
@@ -62,8 +66,10 @@ module.exports = {
     },
   }),
   devServer: {
+    contentBase: path.join(__dirname, 'build'),
+    hot: true,
     port: 3000,
-    hot: isDev,
+    publicPath: '/',
   },
   devtool: isDev ? 'source-map' : '',
   plugins: [
@@ -113,9 +119,9 @@ module.exports = {
         use: cssLoaders(['less-loader']),
       },
       {
-        test: /\.jsx?$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: jsLoaders(),
+        use: jsLoaders(['@babel/preset-typescript']),
       },
       {
         test: /\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$/,

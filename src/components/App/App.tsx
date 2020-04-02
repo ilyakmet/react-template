@@ -1,8 +1,6 @@
 import React from 'react';
-import logo from '../../../public/logo.svg';
 import './App.scss';
-
-const a = 23;
+import logo from '../../../public/logo.svg';
 
 function App() {
   return (
