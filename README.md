@@ -1,4 +1,6 @@
-# React Application Template
+# React FeatureSlices Application Template
+
+> FeatureSlices is a structure pattern for JavaScript frontend projects that aims logic separation of components and library code. The main idea is a split code to logical pieces grouped by business entities called features.
 
 ## Available Scripts
 

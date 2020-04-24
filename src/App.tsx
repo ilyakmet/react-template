@@ -1,6 +1,5 @@
 import React from 'react';
-import './App.scss';
-import logo from '../../../public/logo.svg';
+import logo from '../public/logo.svg';
 
 export default () => {
   return (
